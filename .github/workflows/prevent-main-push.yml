@@ -1,0 +1,21 @@
+name: Block Push to Main
+
+# Trigger this workflow only when someone pushes to the main branch
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  block_push:
+    # Use GitHub-hosted Ubuntu runner
+    runs-on: ubuntu-latest
+
+    steps:
+      # This step simply fails the workflow to block direct pushes
+      - name: Block the push on main branch
+        run: |
+          # Print a message to the user
+          echo -e "🚫 Pushing to main branch is blocked.\nPlease create a feature branch and raise a PR."
+          
+          # Exit with a non-zero status to fail the workflow
+          exit 1
